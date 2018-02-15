@@ -40,7 +40,8 @@ resource "aws_instance" "db-1" {
     subnet_id = "${aws_subnet.private.id}"
     private_ip = "10.0.16.100"
     private_ip = "${var.db_server_private_ip}"
-    associate_public_ip_address = false
+    # We'll need this to install things if we don't use a prebuilt image
+    associate_public_ip_address = true
     source_dest_check = false
     user_data = "${data.template_file.db_setup.rendered}"
 
